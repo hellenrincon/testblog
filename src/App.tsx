@@ -1,19 +1,23 @@
 import React, { StrictMode } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './containers/Home/Home';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Comments from './containers/Comments/Comments';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <div>Hello world!</div>,
+      Component: Home,
     },
     {
       path: "/home",
       Component: Home,
+    },
+    {
+      path: "/comments/:commentId",
+      Component: Comments,
     },
   ]);
   return (
