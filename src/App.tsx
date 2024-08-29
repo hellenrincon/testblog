@@ -1,30 +1,33 @@
-import React, { StrictMode } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/authContext/Authcontext';
+import PrivateRoute from './contexts/PrivateRoute/PrivateRoute';
+import Landing from './containers/Landing/Landing';
 import Home from './containers/Home/Home';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import "bootstrap/dist/css/bootstrap.min.css";
 import Comments from './containers/Comments/Comments';
+import Login from './containers/LogIn/Login';
 
-function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      Component: Home,
-    },
-    {
-      path: "/home",
-      Component: Home,
-    },
-    {
-      path: "/comments/:commentId",
-      Component: Comments,
-    },
-  ]);
+
+const App: React.FC = () => {
   return (
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/comments/:commentId" element={<Comments />} />          
+          <Route
+            path="/landing"
+            element={
+              <PrivateRoute>
+                <Landing />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
-}
+};
 
 export default App;
