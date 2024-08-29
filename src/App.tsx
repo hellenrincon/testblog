@@ -1,8 +1,9 @@
+import React, { StrictMode } from 'react';
+import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { StrictMode } from "react";
-import Home from "./containers/Home/Home";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './containers/Home/Home';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const router = createBrowserRouter([

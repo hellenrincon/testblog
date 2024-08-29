@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Button, Container } from "react-bootstrap";
 import axiosInstance from "../../contexts/Interceptors/axiosInstance";
+import RecipeReviewCard from "../../components/Card/Card";
 
 const Home = () => {
-  const [data, setData] = useState(null);
+  const [dataList, setData] = useState<any[]>([]);
   useEffect(() => {
     axiosInstance.get('/post?limit=10')
       .then(response => {
-        setData(response.data);
+        setData(response.data.data);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -17,11 +18,17 @@ const Home = () => {
 
   return (
     <Container>
-      <div>
-      <h1>Data from API:</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
-      <Button variant="primary">Click me</Button>
+     <>
+      {dataList?.length>0?(
+        dataList.map((item:any, index:number)=>{
+            return <RecipeReviewCard props={{data:  item }} ></RecipeReviewCard>   
+          })
+      ):(
+        <>
+        </>
+      )
+      }
+      </>
     </Container>
   );
 };
